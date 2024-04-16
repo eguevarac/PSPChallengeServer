@@ -1,6 +1,6 @@
 package listeners;
 
-import j_panels.PanelUser;
+import j_panels.PanelAdmin;
 import p_s_p_challenge.PSPChallenge;
 import tools_classes.BlowFishManager;
 import tools_classes.FilesRW;
@@ -80,6 +80,6 @@ public class PanelEditProfileListener extends MouseAdapter {
 
         FilesRW.overwrittingFile();
 
-        PSPChallenge.frame.setContentPane(new PanelUser());
+        PSPChallenge.frame.setContentPane(new PanelAdmin());
     }
 }

@@ -32,42 +32,9 @@ public class PanelInstalledPrograms extends JPanel {
 
     private void extractingListOfPrograms() {
         installedPrograms = new ArrayList<>();
-
-        JOptionPane.showMessageDialog(null, "Ten paciencia. Esto puede tardar un tiempo.");
-
-        // Inicia el hilo para ejecutar el comando
-        Thread thread = new Thread(this::runningCommand);
-
-        thread.start();
-
-        // Espera a que el hilo termine antes de cerrar el cuadro de diálogo de carga
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // Cierra el cuadro de diálogo de carga
-        JOptionPane.showMessageDialog(null, "Lista Cargada.");
-
+        // TODO: 16/04/2024 coger aquí la lista del cliente
     }
 
-    private void runningCommand() {
-        try {
-
-            Process process = Runtime.getRuntime().exec("wmic product get name");
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String resultOfExecution;
-            while ((resultOfExecution = br.readLine()) != null) {
-                installedPrograms.add(resultOfExecution);
-            }
-
-        } catch (IOException e) {
-
-            System.out.println(e);
-        }
-    }
 
     private void addingLabels() {
 

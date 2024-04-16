@@ -31,8 +31,6 @@ public class PanelExecutingPrograms extends JPanel {
 
         extractingListOfProcesses();
 
-        manipulatingData();
-
         addingButtons();
 
         addingJTable();
@@ -40,19 +38,6 @@ public class PanelExecutingPrograms extends JPanel {
         PSPChallenge.frame.setTitle("Tabla de procesos en ejecución");
     }
 
-    private void manipulatingData() {
-        processesList = new ArrayList<>();
-
-        Path path = Paths.get("src/resources/files/processes.txt");
-
-        FilesRW.creatingFile(path);
-
-        FilesRW.writtingProcessesInFile(path, executingProgramsList);
-
-        FilesRW.takingProcessesFromFile(processesList);
-
-        FilesRW.deleteFile(path);
-    }
 
     private void addingJTable() {
 
@@ -96,30 +81,7 @@ public class PanelExecutingPrograms extends JPanel {
 
     private void extractingListOfProcesses() {
         executingProgramsList = new ArrayList<>();
-        //pongo este índice para que no me coja las líneas que no necesito
-        int index = 0;
-        try {
-
-            Process process = Runtime.getRuntime().exec("taskList");
-            BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String resultOfExecution;
-
-            while ((resultOfExecution = br.readLine()) != null) {
-
-                resultOfExecution = resultOfExecution.replaceAll("\s+", ";");
-
-                if (index > 2) {
-                    executingProgramsList.add(resultOfExecution);
-                }
-
-                index++;
-            }
-
-        } catch (IOException e) {
-
-            System.out.println(e);
-        }
-
+        // TODO: 16/04/2024 coger la lista de procesos
 
     }
 
@@ -153,7 +115,7 @@ public class PanelExecutingPrograms extends JPanel {
         if (winProcSelected != null &&
                 winProcSelected.getType().equals("Console")) {
 
-            stoppingProcess();
+            // TODO: 16/04/2024 pedir al cliente que elimine el proceso
 
         } else if (winProcSelected == null) {
 
@@ -166,20 +128,6 @@ public class PanelExecutingPrograms extends JPanel {
         }
     }
 
-    private void stoppingProcess() {
-
-        try {
-            Runtime.getRuntime().exec("taskkill /F /PID ".concat(winProcSelected.getPID()));
-
-            JOptionPane.showMessageDialog(null, "Proceso detenido exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-
-            PSPChallenge.frame.setContentPane(new PanelExecutingPrograms());
-
-        } catch (IOException ex) {
-
-            System.out.println("Problema ejecutando el comando");
-        }
-    }
 
     private void addingBackButton() {
         JButton backButton = new JButton();

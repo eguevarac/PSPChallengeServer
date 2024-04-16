@@ -1,7 +1,6 @@
 package listeners;
 
 import j_panels.PanelAdmin;
-import j_panels.PanelUser;
 import p_s_p_challenge.PSPChallenge;
 
 import javax.swing.*;
@@ -29,7 +28,7 @@ public class BackButtonListener extends MouseAdapter {
                 PSPChallenge.frame.setTitle("Panel de control de administrador");
                 break;
             case 2:
-                PSPChallenge.frame.setContentPane(new PanelUser());
+                PSPChallenge.frame.setContentPane(new PanelAdmin());
                 PSPChallenge.frame.setTitle("Panel de control de usuario");
                 break;
         }

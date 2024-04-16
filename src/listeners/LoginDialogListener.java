@@ -5,7 +5,6 @@ import j_panels.PanelAdmin;
 import j_panels.PanelInstalledPrograms;
 import j_panels.PanelMain;
 import p_s_p_challenge.PSPChallenge;
-import j_panels.PanelUser;
 import tools_classes.BlowFishManager;
 
 import javax.swing.*;
@@ -59,37 +58,6 @@ public class LoginDialogListener extends MouseAdapter {
         }
     }
 
-    private void loginUser(String passwd) {
-
-        if (BlowFishManager.checkingPasswd(passwd, foundUser)) {
-
-            PSPChallenge.actualUser = foundUser;
-
-            DIALOG.dispose();
-
-            goingPanelDependingOnUserType();
-
-
-        } else {
-
-            JOptionPane.showMessageDialog(null, "La contraseña no coincide con la del usuario.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void goingPanelDependingOnUserType() {
-
-        switch (PSPChallenge.actualUser.getUserType()) {
-
-            case 0, 1:
-                PSPChallenge.frame.setContentPane(new PanelAdmin());
-                break;
-            case 2:
-                PSPChallenge.frame.setContentPane(new PanelUser());
-                break;
-        }
-
-    }
-
     private void lookingForUser(String name) {
 
         for (User user :
@@ -101,4 +69,29 @@ public class LoginDialogListener extends MouseAdapter {
             }
         }
     }
+
+    private void loginUser(String passwd) {
+
+        if(foundUser.getUserType() != 2){
+
+            if (BlowFishManager.checkingPasswd(passwd, foundUser)) {
+
+                // TODO: 16/04/2024 abrir conexión
+                PSPChallenge.actualUser = foundUser;
+
+                DIALOG.dispose();
+
+                PSPChallenge.frame.setContentPane(new PanelAdmin());
+
+
+            } else {
+                JOptionPane.showMessageDialog(null, "La contraseña no coincide con la del usuario.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Este usuario no tiene permiso para entrar en la aplicación.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+
+    }
+
 }

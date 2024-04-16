@@ -13,34 +13,15 @@ public class PanelMain extends JPanel {
 
     public PanelMain() {
 
-
-        chooseServerOrClient();
-
         SpellBook.creatingStandardPanelForFrame(this);
 
         addingLabels();
 
-        PSPChallenge.frame.setTitle("Programa de gestión de usuarios y procesos");
+        PSPChallenge.frame.setTitle("Servidor");
     }
 
-    private void chooseServerOrClient() {
-        int adminChoice = JOptionPane.showConfirmDialog(null, "Quieres iniciar sesión como administrador", "Tipo de usuario", JOptionPane.YES_NO_OPTION);
-
-        if (adminChoice == JOptionPane.NO_OPTION) {
-            showConnectionDialog();
-        }
-    }
-
-    private void showConnectionDialog() {
-        String ip;
-        do {
-            ip = JOptionPane.showInputDialog(null, "Introduce IP del servidor", "Conectarse", JOptionPane.OK_CANCEL_OPTION);
-        }while (ip == null || ip.equals(""));
-    }
 
     private void addingLabels() {
-
-        addingRegisterButton();
 
         addingLoginButton();
 
@@ -81,29 +62,7 @@ public class PanelMain extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-
                 LoginDialog dialog = new LoginDialog();
-                dialog.setVisible(true);
-            }
-        });
-    }
-
-    private void addingRegisterButton() {
-        JButton registerButton = new JButton();
-        registerButton.setText("Darse de alta");
-        registerButton.setSize(200, 50);
-        registerButton.setLocation(
-                this.getWidth() / 2 - registerButton.getWidth() / 2,
-                100);
-        this.add(registerButton);
-        registerButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-
-                int userType = PSPChallenge.usersList.isEmpty() ? 0 : 2;
-
-                UserCreationDialog dialog = new UserCreationDialog(userType);
                 dialog.setVisible(true);
             }
         });

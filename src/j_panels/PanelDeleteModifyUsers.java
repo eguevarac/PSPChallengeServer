@@ -87,7 +87,7 @@ public class PanelDeleteModifyUsers extends JPanel {
 
             JOptionPane.showMessageDialog(null, "Se ha modificado el tipo de usuario.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
-            PSPChallenge.frame.setContentPane(new PanelUser());
+            PSPChallenge.frame.setContentPane(new PanelAdmin());
         }
     }
 
