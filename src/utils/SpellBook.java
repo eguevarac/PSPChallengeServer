@@ -1,6 +1,8 @@
 package utils;
 
+import data_classes.User;
 import listeners.BackButtonListener;
+import p_s_p_challenge.PSPChallenge;
 
 import javax.swing.*;
 import java.awt.*;
@@ -91,6 +93,30 @@ public abstract class SpellBook {
         backButton.setLocation(panel.getWidth() / 2 - backButton.getWidth() / 2, 360);
         backButton.addMouseListener(new BackButtonListener());
         panel.add(backButton);
+    }
+
+
+    public static boolean checkingIfUserExist(String name) {
+        boolean alreadyExist = false;
+        for (User user :
+                PSPChallenge.usersList) {
+
+            if (user.getName().toUpperCase().trim().equals(name.toUpperCase())) {
+                alreadyExist = true;
+            }
+        }
+        return alreadyExist;
+    }
+
+    public static void creatingNewUser(String name, String passwd, int userType) {
+
+        passwd = BlowFishManager.encryptingPasswd(passwd);
+
+        User user = new User(name, passwd, userType);
+
+        FilesRW.addingNewUser(user);
+
+        PSPChallenge.usersList.add(user);
     }
 
 }

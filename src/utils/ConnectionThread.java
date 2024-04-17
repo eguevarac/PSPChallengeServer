@@ -5,10 +5,10 @@ import java.net.ServerSocket;
 import static utils.SocketsManager.PORT;
 
 public class ConnectionThread extends Thread {
-
     @Override
     public void run() {
         super.run();
+        boolean isLoggedIn;
         try {
              SocketsManager.server = new ServerSocket(PORT);
             System.out.println("Socket servidor abierto esperando conexiones...");
@@ -20,5 +20,12 @@ public class ConnectionThread extends Thread {
         } catch (Exception e) {
             System.out.println(e);
         }
+
+        do{
+            isLoggedIn = SocketsManager.getRegisterOrLoginPetition();
+        }while (!isLoggedIn);
+
     }
+
+
 }

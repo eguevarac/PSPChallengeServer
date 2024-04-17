@@ -9,6 +9,9 @@ import p_s_p_challenge.PSPChallenge;
 import utils.BlowFishManager;
 import utils.FilesRW;
 
+import static utils.SpellBook.checkingIfUserExist;
+import static utils.SpellBook.creatingNewUser;
+
 public class UserCreationDialogListener extends MouseAdapter {
 
     private final JTextField NAME_FIELD;
@@ -57,11 +60,12 @@ public class UserCreationDialogListener extends MouseAdapter {
 
         } else {
 
-            checkingIfUserExist(name);
+            alreadyExist = checkingIfUserExist(name);
 
             if (!alreadyExist) {
 
-                creatingNewUser(name, passwd);
+                creatingNewUser(name, passwd, USER_TYPE);
+                DIALOG.dispose();
 
             } else {
 
@@ -71,26 +75,4 @@ public class UserCreationDialogListener extends MouseAdapter {
 
     }
 
-    private void checkingIfUserExist(String name) {
-
-        for (User user :
-                PSPChallenge.usersList) {
-
-            if (user.getName().toUpperCase().trim().equals(name.toUpperCase())) {
-                alreadyExist = true;
-            }
-        }
-    }
-
-    private void creatingNewUser(String name, String passwd) {
-
-        passwd = BlowFishManager.encryptingPasswd(passwd);
-
-        User user = new User(name, passwd, USER_TYPE);
-
-        FilesRW.addingNewUser(user);
-
-        PSPChallenge.usersList.add(user);
-        DIALOG.dispose();
-    }
 }
