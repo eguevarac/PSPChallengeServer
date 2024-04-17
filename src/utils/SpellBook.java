@@ -1,6 +1,7 @@
 package utils;
 
 import data_classes.User;
+import j_panels.PanelAdmin;
 import listeners.BackButtonListener;
 import p_s_p_challenge.PSPChallenge;
 
@@ -118,5 +119,35 @@ public abstract class SpellBook {
 
         PSPChallenge.usersList.add(user);
     }
+
+
+    public static User lookingForUser(String name) {
+        User foundUser = null;
+        for (User user :
+                PSPChallenge.usersList) {
+
+            if (user.getName().toUpperCase().trim().equals(name.toUpperCase())) {
+
+                foundUser = user;
+            }
+        }
+        return foundUser;
+    }
+
+    public static String loginClient(String passwd, User foundUser) {
+        String response = "Login realizado con éxito";
+        if (foundUser.getUserType() == 2) {
+
+            if (!BlowFishManager.checkingPasswd(passwd, foundUser)) {
+                response = "La contraseña no coincide con la del usuario.";
+            }
+
+        } else {
+            response = "Este usuario no tiene permiso para entrar en la aplicación";
+        }
+        return response;
+    }
+
+
 
 }

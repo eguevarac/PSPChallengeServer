@@ -5,3 +5,4 @@
 2;manolo;$2a$10$JzrGc.wB9pclggiWu8K5iu8GaE8kiPDlnbDHNmoLuD4XQRjVb5RrO
 2;perico;$2a$10$uxWQOXfQqNpJZ6lzL7RQIe0qJFrJfhpRp0.xYCugdMzz2Na.lCu7a
 2;alfonso;$2a$10$BAjMfXhCE97KyQd0DeOqeeqCfqz07myJf6OM/Q6cc4HxtFLZFfPem
+2;luis;$2a$10$DLd/k2zfh3hAE0QDe65rPuCTTjJ7b1HsUhAAt.CmhZ7dF.UM.2KHG

@@ -4,6 +4,7 @@ import data_classes.User;
 import j_panels.PanelAdmin;
 import p_s_p_challenge.PSPChallenge;
 import utils.BlowFishManager;
+import utils.SpellBook;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -17,7 +18,6 @@ public class LoginDialogListener extends MouseAdapter {
     private final JTextField NAME_FIELD;
     private final JPasswordField PASSWD_FIELD;
     private final JDialog DIALOG;
-    private User foundUser;
 
 
     public LoginDialogListener(JTextField nameField, JPasswordField paswdField, JDialog dialog) {
@@ -43,11 +43,12 @@ public class LoginDialogListener extends MouseAdapter {
 
         } else {
 
-            lookingForUser(name);
+            User foundUser = SpellBook.lookingForUser(name);
 
             if (foundUser != null) {
 
-                loginUser(passwd);
+                loginAdmin(passwd, foundUser);
+                DIALOG.dispose();
 
             } else {
 
@@ -56,19 +57,9 @@ public class LoginDialogListener extends MouseAdapter {
         }
     }
 
-    private void lookingForUser(String name) {
 
-        for (User user :
-                PSPChallenge.usersList) {
 
-            if (user.getName().toUpperCase().trim().equals(name.toUpperCase())) {
-
-                foundUser = user;
-            }
-        }
-    }
-
-    private void loginUser(String passwd) {
+    private void loginAdmin(String passwd, User foundUser) {
 
         if(foundUser.getUserType() != 2){
 
@@ -76,7 +67,6 @@ public class LoginDialogListener extends MouseAdapter {
 
                 PSPChallenge.actualUser = foundUser;
 
-                DIALOG.dispose();
 
                 PSPChallenge.frame.setContentPane(new PanelAdmin());
 
@@ -87,8 +77,6 @@ public class LoginDialogListener extends MouseAdapter {
         }else{
             JOptionPane.showMessageDialog(null, "Este usuario no tiene permiso para entrar en la aplicación.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-
     }
 
 }

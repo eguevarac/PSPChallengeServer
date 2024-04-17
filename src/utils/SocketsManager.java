@@ -16,7 +16,6 @@ public abstract class SocketsManager {
     public static boolean isOpen = true;
     public static Socket socketClient;
     public static ServerSocket server;
-    public static User userTryingLogin;
 
 
     /**
@@ -32,12 +31,9 @@ public abstract class SocketsManager {
             switch (petition){
                 case "register":
                     tryToRegister();
-                    System.out.println("Ha escogido registro");
                     break;
                 case "login":
-                    System.out.println("Ha escogido login");
-                    isLoggedIn = true;
-                    //tryToLogin();
+                    isLoggedIn = tryToLogin();
                     break;
             }
         } catch (Exception e) {
@@ -47,8 +43,31 @@ public abstract class SocketsManager {
         return isLoggedIn;
     }
 
+    private static boolean tryToLogin() {
+        boolean loginSuccessful = false;
+        User userToLogin = getUserFromClient();
+        User foundUser;
+        String msg;
+        if(userToLogin != null){
+           foundUser = SpellBook.lookingForUser(userToLogin.getName());
+           if(foundUser != null){
+               msg = SpellBook.loginClient(userToLogin.getPasswd(), foundUser);
+               sendResponse(msg);
+               if(msg.equals("Login realizado con éxito")){
+                   loginSuccessful = true;
+                   sendUser(foundUser);
+               }
+           }else{
+               sendResponse("El nombre de usuario no está registrado");
+           }
+        }else {
+            sendResponse("Ha habido un problema de conexión");
+        }
+        return loginSuccessful;
+    }
+
     private static void tryToRegister() {
-        User userToRegister = getUser();
+        User userToRegister = getUserFromClient();
         boolean alreadyExist;
         if (userToRegister != null){
             alreadyExist = SpellBook.checkingIfUserExist(userToRegister.getName());
@@ -59,7 +78,7 @@ public abstract class SocketsManager {
                 sendResponse("Ya existe un usuario registrado con ese nombre");
             }
         }else {
-            sendResponse("Ha habido un error en el registro de usuario");
+            sendResponse("Ha habido un problema de conexión");
         }
     }
 
@@ -76,14 +95,13 @@ public abstract class SocketsManager {
         }
     }
 
-    public static User getUser() {
+    public static User getUserFromClient() {
         User user = null;
         try {
             InputStream is = socketClient.getInputStream();
             ObjectInputStream ois = new ObjectInputStream(is);
             user = (User) ois.readObject();
-            System.out.println(user.getName());
-            System.out.println(user.getPasswd());
+
         } catch (Exception e) {
 
             System.out.println(e);
@@ -91,6 +109,22 @@ public abstract class SocketsManager {
         return user;
     }
 
+
+    /**
+     * Envía un objeto de tipo User al server
+     *
+     * @param user User que enviará al server
+     */
+    public static void sendUser(User user) {
+        try {
+
+            new ObjectOutputStream(socketClient.getOutputStream()).writeObject(user);
+
+        } catch (IOException ex) {
+
+            System.out.println("excepción IOE");
+        }
+    }
 
 
 
