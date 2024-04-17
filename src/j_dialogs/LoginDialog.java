@@ -1,7 +1,7 @@
 package j_dialogs;
 
 import listeners.LoginDialogListener;
-import tools_classes.SpellBook;
+import utils.SpellBook;
 
 import javax.swing.*;
 

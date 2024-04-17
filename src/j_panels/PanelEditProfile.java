@@ -1,9 +1,8 @@
 package j_panels;
 
-import listeners.BackButtonListener;
 import listeners.PanelEditProfileListener;
 import p_s_p_challenge.PSPChallenge;
-import tools_classes.SpellBook;
+import utils.SpellBook;
 
 import javax.swing.*;
 

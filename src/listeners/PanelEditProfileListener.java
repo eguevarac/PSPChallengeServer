@@ -2,8 +2,8 @@ package listeners;
 
 import j_panels.PanelAdmin;
 import p_s_p_challenge.PSPChallenge;
-import tools_classes.BlowFishManager;
-import tools_classes.FilesRW;
+import utils.BlowFishManager;
+import utils.FilesRW;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;

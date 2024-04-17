@@ -3,18 +3,12 @@ package j_panels;
 import data_classes.WindowsProcess;
 import listeners.BackButtonListener;
 import p_s_p_challenge.PSPChallenge;
-import tools_classes.FilesRW;
-import tools_classes.SpellBook;
+import utils.SpellBook;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class PanelExecutingPrograms extends JPanel {

@@ -6,8 +6,8 @@ import java.awt.event.MouseEvent;
 
 import data_classes.User;
 import p_s_p_challenge.PSPChallenge;
-import tools_classes.BlowFishManager;
-import tools_classes.FilesRW;
+import utils.BlowFishManager;
+import utils.FilesRW;
 
 public class UserCreationDialogListener extends MouseAdapter {
 

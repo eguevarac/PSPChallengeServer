@@ -2,7 +2,8 @@ package j_panels;
 
 import j_dialogs.UserCreationDialog;
 import p_s_p_challenge.PSPChallenge;
-import tools_classes.SpellBook;
+import utils.ConnectionThread;
+import utils.SpellBook;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -17,6 +18,9 @@ public class PanelAdmin extends JPanel{
         addingButtons();
 
         PSPChallenge.frame.setTitle("Panel de control de administrador");
+
+        ConnectionThread conThread = new ConnectionThread();
+        conThread.start();
     }
 
 

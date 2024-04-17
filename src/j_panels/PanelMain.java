@@ -1,9 +1,8 @@
 package j_panels;
 
 import j_dialogs.LoginDialog;
-import j_dialogs.UserCreationDialog;
 import p_s_p_challenge.PSPChallenge;
-import tools_classes.SpellBook;
+import utils.SpellBook;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;

@@ -1,14 +1,9 @@
 package j_panels;
 
-import listeners.BackButtonListener;
 import p_s_p_challenge.PSPChallenge;
-import tools_classes.SpellBook;
+import utils.SpellBook;
 
 import javax.swing.*;
-import java.awt.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class PanelInstalledPrograms extends JPanel {

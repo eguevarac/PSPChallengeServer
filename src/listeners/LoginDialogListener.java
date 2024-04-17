@@ -2,10 +2,8 @@ package listeners;
 
 import data_classes.User;
 import j_panels.PanelAdmin;
-import j_panels.PanelInstalledPrograms;
-import j_panels.PanelMain;
 import p_s_p_challenge.PSPChallenge;
-import tools_classes.BlowFishManager;
+import utils.BlowFishManager;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -76,7 +74,6 @@ public class LoginDialogListener extends MouseAdapter {
 
             if (BlowFishManager.checkingPasswd(passwd, foundUser)) {
 
-                // TODO: 16/04/2024 abrir conexión
                 PSPChallenge.actualUser = foundUser;
 
                 DIALOG.dispose();

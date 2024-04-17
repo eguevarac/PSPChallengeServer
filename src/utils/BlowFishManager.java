@@ -1,4 +1,4 @@
-package tools_classes;
+package utils;
 
 import data_classes.User;
 import org.mindrot.jbcrypt.BCrypt;

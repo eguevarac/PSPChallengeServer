@@ -1,6 +1,8 @@
 package data_classes;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     protected String name;
     protected String passwd;

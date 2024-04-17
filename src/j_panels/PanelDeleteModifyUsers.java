@@ -3,9 +3,9 @@ package j_panels;
 import data_classes.User;
 import listeners.BackButtonListener;
 import p_s_p_challenge.PSPChallenge;
-import tools_classes.BlowFishManager;
-import tools_classes.FilesRW;
-import tools_classes.SpellBook;
+import utils.BlowFishManager;
+import utils.FilesRW;
+import utils.SpellBook;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
