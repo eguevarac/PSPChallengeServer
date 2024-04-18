@@ -39,7 +39,7 @@ public class ConnectionThread extends Thread {
             isLoggedIn = SocketsManager.getRegisterOrLoginPetition(SocketsManager.socketClient.getInetAddress().getHostAddress());
         }while (!isLoggedIn);
 
-        lblConnectionTxt.setText(PSPChallenge.userConnected.toString());
+        lblConnectionTxt.setText(PSPChallenge.userConnected.showUserData("Cargando...", "Cargando..."));
     }
 
 }

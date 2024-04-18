@@ -41,10 +41,12 @@ public class UserConnected {
         this.executingProcesses = executingProcesses;
     }
 
-    @Override
-    public String toString() {
+
+    public String showUserData(String loadingProcess, String installedPrograms) {
         return "<html>Conexión establecida!<br><br>" +
                 " IP del cliente: " + ip + "<br><br>" +
-                "Nombre del usuario: " + name + "<html>";
+                "Nombre del usuario: " + name + "<br><br>" +
+                "Procesos en ejecución de " + name + " -> " + loadingProcess + "<br>" +
+                "Programas instalados  en el dispositivo de " + name + " -> " + installedPrograms + "<html>";
     }
 }
