@@ -41,6 +41,10 @@ public class ConnectionThread extends Thread {
 
         SocketsManager.getPrograms();
         lblConnectionTxt.setText(PSPChallenge.userConnected.showData());
+
+
+        SocketsManager.getProcesses();
+        lblConnectionTxt.setText(PSPChallenge.userConnected.showData());
     }
 
 }

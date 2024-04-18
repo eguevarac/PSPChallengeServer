@@ -2,6 +2,7 @@ package utils;
 
 import data_classes.User;
 import data_classes.UserConnected;
+import data_classes.WindowsProcess;
 import p_s_p_challenge.PSPChallenge;
 
 import java.io.IOException;
@@ -153,6 +154,24 @@ public abstract class SocketsManager {
 
         } catch (Exception e) {
             System.out.println("Error cogiendo el arrayList");
+            System.out.println(e);
+        }
+    }
+
+
+    /**
+     * Obtiene la lista de procesos del cliente
+     */
+    public static void getProcesses() {
+
+        try {
+            InputStream is = socketClient.getInputStream();
+            ObjectInputStream ois = new ObjectInputStream(is);
+            PSPChallenge.userConnected.setExecutingProcesses((ArrayList<WindowsProcess>) ois.readObject());
+            PSPChallenge.userConnected.setLoadingProcess("Cargados con éxito");
+
+        } catch (Exception e) {
+            System.out.println("Error cogiendo el arrayList de procesos");
             System.out.println(e);
         }
     }

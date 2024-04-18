@@ -1,12 +1,13 @@
 package data_classes;
 
-public class WindowsProcess {
+import java.io.Serializable;
 
-    String name;
+public class WindowsProcess implements Serializable {
 
-    String PID;
-    String type;
-    String memory;
+    private String name;
+    private String PID;
+    private String type;
+    private String memory;
 
     public WindowsProcess(String name, String PID, String type, String memory) {
 

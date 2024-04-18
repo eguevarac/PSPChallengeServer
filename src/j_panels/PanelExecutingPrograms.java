@@ -14,8 +14,7 @@ import java.util.ArrayList;
 public class PanelExecutingPrograms extends JPanel {
 
     WindowsProcess winProcSelected;
-    ArrayList<String> executingProgramsList;
-    ArrayList<WindowsProcess> processesList;
+
     JPanel panelAdmin;
 
     public PanelExecutingPrograms(JPanel panelAdmin) {
@@ -23,8 +22,6 @@ public class PanelExecutingPrograms extends JPanel {
         this.panelAdmin = panelAdmin;
         SpellBook.creatingStandardPanelForFrame(this);
 
-
-        extractingListOfProcesses();
 
         addingButtons();
 
@@ -36,12 +33,12 @@ public class PanelExecutingPrograms extends JPanel {
 
     private void addingJTable() {
 
-        if(processesList != null){
+        if (PSPChallenge.userConnected != null && PSPChallenge.userConnected.getExecutingProcesses() != null) {
             // Convertir la lista de objetos a un arreglo bidimensional para la JTable
-            Object[][] tableData = new Object[processesList.size()][4];
+            Object[][] tableData = new Object[PSPChallenge.userConnected.getExecutingProcesses().size()][4];
 
-            for (int i = 0; i < processesList.size(); i++) {
-                WindowsProcess windowsProcess = processesList.get(i);
+            for (int i = 0; i < PSPChallenge.userConnected.getExecutingProcesses().size(); i++) {
+                WindowsProcess windowsProcess = PSPChallenge.userConnected.getExecutingProcesses().get(i);
                 tableData[i][0] = windowsProcess.getName();
                 tableData[i][1] = windowsProcess.getPID();
                 tableData[i][2] = windowsProcess.getType();
@@ -69,10 +66,10 @@ public class PanelExecutingPrograms extends JPanel {
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
 
-                    winProcSelected = processesList.get(table.getSelectedRow());
+                    winProcSelected = PSPChallenge.userConnected.getExecutingProcesses().get(table.getSelectedRow());
                 }
             });
-        }else{
+        } else {
             JLabel lblNoPrograms = new JLabel();
             lblNoPrograms.setText("Todavía no se han cargado los programas en ejecución del usuario. Vuelva al panel Main");
             lblNoPrograms.setSize(500, 300);
@@ -83,12 +80,6 @@ public class PanelExecutingPrograms extends JPanel {
 
     }
 
-
-    private void extractingListOfProcesses() {
-        executingProgramsList = new ArrayList<>();
-        // TODO: 16/04/2024 coger la lista de procesos
-
-    }
 
     private void addingButtons() {
 

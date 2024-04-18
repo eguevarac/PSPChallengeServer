@@ -36,7 +36,7 @@ public class PanelInstalledPrograms extends JPanel {
 
     private void addingJList() {
 
-        if (PSPChallenge.userConnected != null && !PSPChallenge.userConnected.getInstalledPrograms().isEmpty()){
+        if (PSPChallenge.userConnected != null && PSPChallenge.userConnected.getInstalledPrograms() != null){
             DefaultListModel defaultListModel = new DefaultListModel();
             JList jListInstalledPrograms = new JList();
             jListInstalledPrograms.setModel(defaultListModel);
