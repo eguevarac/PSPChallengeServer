@@ -15,12 +15,14 @@ public class PanelEditProfileListener extends MouseAdapter {
     JPasswordField newPasswdField;
     JPasswordField newPasswdField2;
     JPasswordField oldPasswdField;
+    JPanel panelAdmin;
 
-    public PanelEditProfileListener(JTextField nameField, JPasswordField newPasswdField, JPasswordField newPasswdField2, JPasswordField oldPasswdField) {
+    public PanelEditProfileListener(JTextField nameField, JPasswordField newPasswdField, JPasswordField newPasswdField2, JPasswordField oldPasswdField, JPanel panelAdmin) {
         this.nameField = nameField;
         this.newPasswdField = newPasswdField;
         this.newPasswdField2 = newPasswdField2;
         this.oldPasswdField = oldPasswdField;
+        this.panelAdmin = panelAdmin;
     }
 
     @Override
@@ -80,6 +82,6 @@ public class PanelEditProfileListener extends MouseAdapter {
 
         FilesRW.overwrittingFile();
 
-        PSPChallenge.frame.setContentPane(new PanelAdmin());
+        PSPChallenge.frame.setContentPane(panelAdmin);
     }
 }

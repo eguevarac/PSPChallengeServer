@@ -64,35 +64,6 @@ public class FilesRW {
 
     }
 
-    public static void takingProcessesFromFile(ArrayList<WindowsProcess> processesList) {
-        String fileURL = "src/resources/files/processes.txt";
-        String line;
-        String[] data;
-
-        processesList.clear();
-
-        try (BufferedReader br = new BufferedReader(new FileReader(fileURL))) {
-
-            while ((line = br.readLine()) != null) {
-
-                data = line.split(";");
-
-                processesList.add(new WindowsProcess(data[0], data[1], data[2], data[4].concat(data[5])));
-            }
-
-        } catch (FileNotFoundException e) {
-
-            System.out.println("NO SE HA ENCONTRADO EL FICHERO");
-
-        } catch (IOException e) {
-
-            System.out.println("ERROR DURANTE LA LECTURA DEL FICHERO");
-
-        } catch (ArrayIndexOutOfBoundsException e) {
-
-            System.out.println("INFORMACIÓN MAL GUARDADA EN EL FICHERO");
-        }
-    }
 
     /**
      * Añade al fichero un nuevo usuario
@@ -150,18 +121,6 @@ public class FilesRW {
         }
     }
 
-    public static void writtingProcessesInFile(Path path, ArrayList<String> processesList) {
-        for (String string : processesList) {
-
-            try {
-                Files.writeString(path, string + System.lineSeparator(), StandardOpenOption.APPEND);
-
-            } catch (IOException ee) {
-
-                System.out.println("ERROR EN LA ESCRITURA DEL FICHERO");
-            }
-        }
-    }
 
     /**
      * Crea un nuevo fichero en la ruta establecida

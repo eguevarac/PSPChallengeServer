@@ -41,7 +41,7 @@ public class PanelEditProfile extends JPanel {
         button.setSize(200, 50);
         button.setText("Aceptar cambios");
         button.setLocation(this.getWidth() / 2 - button.getWidth() / 2, 300);
-        button.addMouseListener(new PanelEditProfileListener(nameField, newPasswdField, newPasswdField2, oldPasswdField));
+        button.addMouseListener(new PanelEditProfileListener(nameField, newPasswdField, newPasswdField2, oldPasswdField, panelAdmin));
         this.add(button);
     }
 
