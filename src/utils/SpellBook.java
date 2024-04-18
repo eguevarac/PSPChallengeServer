@@ -2,11 +2,12 @@ package utils;
 
 import data_classes.User;
 import j_panels.PanelAdmin;
-import listeners.BackButtonListener;
 import p_s_p_challenge.PSPChallenge;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Almacena métodos diversos para usar a lo largo de la aplicación
@@ -86,14 +87,20 @@ public abstract class SpellBook {
         return contentPane;
     }
 
-    public static void addingBackButton(JPanel panel) {
+    public static void addingBackButton(JPanel actualPanel, JPanel panelAdmin) {
         JButton backButton = new JButton();
 
         backButton.setSize(200, 50);
         backButton.setText("Volver");
-        backButton.setLocation(panel.getWidth() / 2 - backButton.getWidth() / 2, 360);
-        backButton.addMouseListener(new BackButtonListener());
-        panel.add(backButton);
+        backButton.setLocation(actualPanel.getWidth() / 2 - backButton.getWidth() / 2, 360);
+        backButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                PSPChallenge.frame.setContentPane(panelAdmin);
+            }
+        });
+        actualPanel.add(backButton);
     }
 
 

@@ -39,22 +39,22 @@ public class PanelAdmin extends JPanel{
 
     private void addingButtons() {
 
-        addingProfileButton();
+        addingProfileButton(this);
 
         addingLogoutButton();
 
-        addingInstalledPrgButton();
+        addingInstalledPrgButton(this);
 
-        addingExecuteProgButton();
+        addingExecuteProgButton(this);
 
         addingNewRegularUserButton();
 
         addingNewAdminButton();
 
-        addingDeleteOrModifyButton();
+        addingDeleteOrModifyButton(this);
     }
 
-    private void addingExecuteProgButton() {
+    private void addingExecuteProgButton(JPanel panelAdmin) {
         JButton executingProgButton = new JButton();
         executingProgButton.setText("Procesos en ejecución");
         executingProgButton.setSize(200, 50);
@@ -67,13 +67,13 @@ public class PanelAdmin extends JPanel{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                PSPChallenge.frame.setContentPane(new PanelExecutingPrograms());
+                PSPChallenge.frame.setContentPane(new PanelExecutingPrograms(panelAdmin));
             }
         });
 
     }
 
-    private void addingInstalledPrgButton() {
+    private void addingInstalledPrgButton(JPanel panelAdmin) {
 
         JButton consultButton = new JButton();
         consultButton.setText("Programas instalados");
@@ -87,13 +87,13 @@ public class PanelAdmin extends JPanel{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                PSPChallenge.frame.setContentPane(new PanelInstalledPrograms());
+                PSPChallenge.frame.setContentPane(new PanelInstalledPrograms(panelAdmin));
             }
         });
     }
 
 
-    private void addingProfileButton() {
+    private void addingProfileButton(JPanel panelAdmin) {
         JButton profileButton = new JButton();
         profileButton.setText("Editar perfil");
         profileButton.setSize(200, 50);
@@ -106,7 +106,7 @@ public class PanelAdmin extends JPanel{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                PSPChallenge.frame.setContentPane(new PanelEditProfile());
+                PSPChallenge.frame.setContentPane(new PanelEditProfile(panelAdmin));
             }
         });
     }
@@ -131,7 +131,7 @@ public class PanelAdmin extends JPanel{
         });
     }
 
-    private void addingDeleteOrModifyButton() {
+    private void addingDeleteOrModifyButton(JPanel panelAdmin) {
         JButton deleteModifyButton = new JButton();
         deleteModifyButton.setText("Borrar/Modificar usuario");
         deleteModifyButton.setSize(200, 50);
@@ -144,7 +144,7 @@ public class PanelAdmin extends JPanel{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                PSPChallenge.frame.setContentPane(new PanelDeleteModifyUsers());
+                PSPChallenge.frame.setContentPane(new PanelDeleteModifyUsers(panelAdmin));
 
             }
         });

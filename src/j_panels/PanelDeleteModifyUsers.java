@@ -1,7 +1,6 @@
 package j_panels;
 
 import data_classes.User;
-import listeners.BackButtonListener;
 import p_s_p_challenge.PSPChallenge;
 import utils.BlowFishManager;
 import utils.FilesRW;
@@ -15,10 +14,11 @@ import java.awt.event.MouseEvent;
 public class PanelDeleteModifyUsers extends JPanel {
 
     User userSelected;
+    JPanel panelAdmin;
 
+    public PanelDeleteModifyUsers(JPanel panelAdmin) {
 
-    public PanelDeleteModifyUsers() {
-
+        this.panelAdmin = panelAdmin;
         SpellBook.creatingStandardPanelForFrame(this);
 
 
@@ -31,7 +31,7 @@ public class PanelDeleteModifyUsers extends JPanel {
 
     private void addingButtons() {
 
-        addingBackButton();
+        addingBackButton(panelAdmin);
 
         addingDeleteButton();
 
@@ -69,7 +69,7 @@ public class PanelDeleteModifyUsers extends JPanel {
 
             FilesRW.overwrittingFile();
 
-            PSPChallenge.frame.setContentPane(new PanelDeleteModifyUsers());
+            PSPChallenge.frame.setContentPane(new PanelDeleteModifyUsers(panelAdmin));
 
         } else if (userSelected == null) {
 
@@ -87,7 +87,7 @@ public class PanelDeleteModifyUsers extends JPanel {
 
             JOptionPane.showMessageDialog(null, "Se ha modificado el tipo de usuario.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
-            PSPChallenge.frame.setContentPane(new PanelAdmin());
+            PSPChallenge.frame.setContentPane(panelAdmin);
         }
     }
 
@@ -111,13 +111,19 @@ public class PanelDeleteModifyUsers extends JPanel {
         });
     }
 
-    private void addingBackButton() {
+    private void addingBackButton(JPanel panelAdmin) {
         JButton backButton = new JButton();
 
         backButton.setSize(220, 40);
         backButton.setText("Volver");
         backButton.setLocation(350, 400);
-        backButton.addMouseListener(new BackButtonListener());
+        backButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                PSPChallenge.frame.setContentPane(panelAdmin);
+            }
+        });
         this.add(backButton);
     }
 
@@ -199,7 +205,7 @@ public class PanelDeleteModifyUsers extends JPanel {
 
         JOptionPane.showMessageDialog(null, "Usuario borrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
-        PSPChallenge.frame.setContentPane(new PanelDeleteModifyUsers());
+        PSPChallenge.frame.setContentPane(new PanelDeleteModifyUsers(panelAdmin));
     }
 
 
