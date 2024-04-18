@@ -10,15 +10,12 @@ import java.util.ArrayList;
 public class PanelInstalledPrograms extends JPanel {
 
 
-    ArrayList<String> installedPrograms;
     JPanel panelAdmin;
 
     public PanelInstalledPrograms(JPanel panelAdmin) {
 
         this.panelAdmin = panelAdmin;
         SpellBook.creatingStandardPanelForFrame(this);
-
-        extractingListOfPrograms();
 
         addingButtons();
 
@@ -27,10 +24,7 @@ public class PanelInstalledPrograms extends JPanel {
         PSPChallenge.frame.setTitle("Lista de programas instalados");
     }
 
-    private void extractingListOfPrograms() {
-        installedPrograms = new ArrayList<>();
-        // TODO: 16/04/2024 coger aquí la lista del cliente
-    }
+
 
 
     private void addingLabels() {
@@ -42,15 +36,15 @@ public class PanelInstalledPrograms extends JPanel {
 
     private void addingJList() {
 
-        if (!installedPrograms.isEmpty()){
+        if (PSPChallenge.userConnected != null && !PSPChallenge.userConnected.getInstalledPrograms().isEmpty()){
             DefaultListModel defaultListModel = new DefaultListModel();
             JList jListInstalledPrograms = new JList();
             jListInstalledPrograms.setModel(defaultListModel);
 
 
             //pongo la variable i a 1 para que no me incluya el título name del texto extraído
-            for (int i = 1; i < installedPrograms.size(); i++) {
-                defaultListModel.addElement(installedPrograms.get(i));
+            for (int i = 1; i < PSPChallenge.userConnected.getInstalledPrograms().size(); i++) {
+                defaultListModel.addElement(PSPChallenge.userConnected.getInstalledPrograms().get(i));
             }
 
             JScrollPane listScroller = new JScrollPane();
@@ -62,7 +56,7 @@ public class PanelInstalledPrograms extends JPanel {
             this.add(listScroller);
         }else{
             JLabel lblNoPrograms = new JLabel();
-            lblNoPrograms.setText("Todavía no se han cargado los programas instalados del usuario. Vuelva al panel Main");
+            lblNoPrograms.setText("Todavía no se han cargado los programas instalados del usuario. Vuelva al panel de administración");
             lblNoPrograms.setSize(500, 300);
             lblNoPrograms.setForeground(Color.white);
             lblNoPrograms.setLocation(this.getWidth() / 2 - lblNoPrograms.getWidth() / 2, 20);

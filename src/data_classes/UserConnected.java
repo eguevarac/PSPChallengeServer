@@ -9,10 +9,23 @@ public class UserConnected {
     private ArrayList<String> installedPrograms;
     private ArrayList<WindowsProcess> executingProcesses;
 
+    private String loadingPrograms;
+    private String loadingProcess;
+
 
     public UserConnected(String name, String ip) {
         this.name = name;
         this.ip = ip;
+        loadingProcess = "Cargando...";
+        loadingPrograms = "Cargando...";
+    }
+
+    public void setLoadingPrograms(String loadingPrograms) {
+        this.loadingPrograms = loadingPrograms;
+    }
+
+    public void setLoadingProcess(String loadingProcess) {
+        this.loadingProcess = loadingProcess;
     }
 
     public String getName() {
@@ -40,11 +53,11 @@ public class UserConnected {
     }
 
 
-    public String showData(String loadingProcess, String installedPrograms) {
+    public String showData() {
         return "<html>Conexión establecida!<br><br>" +
                 " IP del cliente: " + ip + "<br><br>" +
                 "Nombre del usuario: " + name + "<br><br>" +
                 "Procesos en ejecución de " + name + " -> " + loadingProcess + "<br>" +
-                "Programas instalados  en el dispositivo de " + name + " -> " + installedPrograms + "<html>";
+                "Programas instalados  en el dispositivo de " + name + " -> " + loadingPrograms + "<html>";
     }
 }

@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public abstract class SocketsManager {
 
@@ -136,6 +137,23 @@ public abstract class SocketsManager {
         } catch (IOException ex) {
 
             System.out.println("excepción IOE");
+        }
+    }
+
+    /**
+     * Obtiene la lista de programas del cliente
+     */
+    public static void getPrograms() {
+
+        try {
+            InputStream is = socketClient.getInputStream();
+            ObjectInputStream ois = new ObjectInputStream(is);
+            PSPChallenge.userConnected.setInstalledPrograms((ArrayList<String>) ois.readObject());
+            PSPChallenge.userConnected.setLoadingPrograms("Cargados con éxito");
+
+        } catch (Exception e) {
+            System.out.println("Error cogiendo el arrayList");
+            System.out.println(e);
         }
     }
 
