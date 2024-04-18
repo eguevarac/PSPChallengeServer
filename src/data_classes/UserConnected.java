@@ -1,5 +1,7 @@
 package data_classes;
 
+import p_s_p_challenge.PSPChallenge;
+
 import java.util.ArrayList;
 
 public class UserConnected {
@@ -69,6 +71,14 @@ public class UserConnected {
 
     public void setExecutingProcesses(ArrayList<WindowsProcess> executingProcesses) {
         this.executingProcesses = executingProcesses;
+    }
+
+    public void clearDataAfterOrder(){
+        PSPChallenge.userConnected.setProcessPID("");
+        processPID = "";
+        orderToClient = "";
+        executingProcesses = new ArrayList<>();
+        loadingProcess = "cargando...";
     }
 
 
