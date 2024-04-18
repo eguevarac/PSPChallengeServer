@@ -8,9 +8,10 @@ public class UserConnected {
     private String ip;
     private ArrayList<String> installedPrograms;
     private ArrayList<WindowsProcess> executingProcesses;
-
     private String loadingPrograms;
     private String loadingProcess;
+    private String orderToClient;
+    private String processPID;
 
 
     public UserConnected(String name, String ip) {
@@ -18,6 +19,24 @@ public class UserConnected {
         this.ip = ip;
         loadingProcess = "Cargando...";
         loadingPrograms = "Cargando...";
+        orderToClient = "";
+        processPID = "";
+    }
+
+    public String getProcessPID() {
+        return processPID;
+    }
+
+    public void setProcessPID(String processPID) {
+        this.processPID = processPID;
+    }
+
+    public String getOrderToClient() {
+        return orderToClient;
+    }
+
+    public void setOrderToClient(String orderToClient) {
+        this.orderToClient = orderToClient;
     }
 
     public void setLoadingPrograms(String loadingPrograms) {

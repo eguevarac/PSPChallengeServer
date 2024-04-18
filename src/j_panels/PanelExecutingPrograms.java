@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class PanelExecutingPrograms extends JPanel {
 
     WindowsProcess winProcSelected;
-
     JPanel panelAdmin;
 
     public PanelExecutingPrograms(JPanel panelAdmin) {
@@ -111,7 +110,10 @@ public class PanelExecutingPrograms extends JPanel {
         if (winProcSelected != null &&
                 winProcSelected.getType().equals("Console")) {
 
-            // TODO: 16/04/2024 pedir al cliente que elimine el proceso
+            PSPChallenge.userConnected.setOrderToClient("stopProcess");
+            PSPChallenge.userConnected.setProcessPID(winProcSelected.getPID());
+            JOptionPane.showMessageDialog(null, "Petición almacenada", "Solicitud aceptada", JOptionPane.INFORMATION_MESSAGE);
+
 
         } else if (winProcSelected == null) {
 

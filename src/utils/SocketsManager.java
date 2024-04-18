@@ -59,17 +59,17 @@ public abstract class SocketsManager {
            foundUser = SpellBook.lookingForUser(userToLogin.getName());
            if(foundUser != null){
                msg = SpellBook.loginClient(userToLogin.getPasswd(), foundUser);
-               sendResponse(msg);
+               sendString(msg);
                if(msg.equals("Login realizado con éxito")){
                    loginSuccessful = true;
                    sendUser(foundUser);
                    PSPChallenge.userConnected = new UserConnected(foundUser.getName(), ipClient);
                }
            }else{
-               sendResponse("El nombre de usuario no está registrado");
+               sendString("El nombre de usuario no está registrado");
            }
         }else {
-            sendResponse("Ha habido un problema de conexión");
+            sendString("Ha habido un problema de conexión");
         }
         return loginSuccessful;
     }
@@ -84,12 +84,12 @@ public abstract class SocketsManager {
             alreadyExist = SpellBook.checkingIfUserExist(userToRegister.getName());
             if(!alreadyExist){
                 SpellBook.creatingNewUser(userToRegister.getName(), userToRegister.getPasswd(), userToRegister.getUserType());
-                sendResponse("Usuario registrado con éxito");
+                sendString("Usuario registrado con éxito");
             }else{
-                sendResponse("Ya existe un usuario registrado con ese nombre");
+                sendString("Ya existe un usuario registrado con ese nombre");
             }
         }else {
-            sendResponse("Ha habido un problema de conexión");
+            sendString("Ha habido un problema de conexión");
         }
     }
 
@@ -98,12 +98,32 @@ public abstract class SocketsManager {
      * Envía una respuesta al cliente
      * @param response String con la respuesta
      */
-    public static void sendResponse(String response) {
+    public static void sendString(String response) {
         try {
             new ObjectOutputStream(socketClient.getOutputStream()).writeObject(response);
         } catch (IOException ex) {
             System.out.println("excepción IOE");
         }
+    }
+
+    /**
+     * Recibe una respuesta del server para poder mostrarla en un diálogo
+     *
+     * @return String con la respuesta del server
+     */
+    public static String getString() {
+        String response = "";
+        try {
+            InputStream is = socketClient.getInputStream();
+            ObjectInputStream ois = new ObjectInputStream(is);
+            response = (String) ois.readObject();
+
+        } catch (Exception e) {
+
+            System.out.println(e);
+        }
+
+        return response;
     }
 
     /**
