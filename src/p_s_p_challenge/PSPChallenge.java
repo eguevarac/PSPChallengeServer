@@ -1,6 +1,7 @@
 package p_s_p_challenge;
 
 import data_classes.User;
+import data_classes.UserConnected;
 import listeners.FrameWindowListener;
 import j_panels.PanelMain;
 
@@ -14,6 +15,8 @@ public class PSPChallenge {
     public static User actualUser;
 
     public static JFrame frame;
+
+    public static UserConnected userConnected;
 
     public PSPChallenge() {
     }

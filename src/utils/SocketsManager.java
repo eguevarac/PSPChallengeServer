@@ -1,6 +1,8 @@
 package utils;
 
 import data_classes.User;
+import data_classes.UserConnected;
+import p_s_p_challenge.PSPChallenge;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,7 +14,7 @@ import java.net.Socket;
 public abstract class SocketsManager {
 
     public static String ipServer;
-    public static final int PORT = 5000;
+    public static final int PORT = 5002;
     public static boolean isOpen = true;
     public static Socket socketClient;
     public static ServerSocket server;
@@ -21,7 +23,7 @@ public abstract class SocketsManager {
     /**
      * Recoge la petición de registro o login del usuario
      */
-    public static boolean getRegisterOrLoginPetition() {
+    public static boolean getRegisterOrLoginPetition(String ipClient) {
         String petition;
         boolean isLoggedIn = false;
         try {
@@ -33,7 +35,7 @@ public abstract class SocketsManager {
                     tryToRegister();
                     break;
                 case "login":
-                    isLoggedIn = tryToLogin();
+                    isLoggedIn = tryToLogin(ipClient);
                     break;
             }
         } catch (Exception e) {
@@ -43,7 +45,7 @@ public abstract class SocketsManager {
         return isLoggedIn;
     }
 
-    private static boolean tryToLogin() {
+    private static boolean tryToLogin(String ipClient) {
         boolean loginSuccessful = false;
         User userToLogin = getUserFromClient();
         User foundUser;
@@ -56,6 +58,7 @@ public abstract class SocketsManager {
                if(msg.equals("Login realizado con éxito")){
                    loginSuccessful = true;
                    sendUser(foundUser);
+                   PSPChallenge.userConnected = new UserConnected(foundUser.getName(), ipClient);
                }
            }else{
                sendResponse("El nombre de usuario no está registrado");

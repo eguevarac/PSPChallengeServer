@@ -6,21 +6,34 @@ import utils.ConnectionThread;
 import utils.SpellBook;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class PanelAdmin extends JPanel{
 
+    public JLabel lblConnectionTxt;
+
+
     public PanelAdmin() {
 
         SpellBook.creatingStandardPanelForFrame(this);
 
+        addInfoLabel();
         addingButtons();
 
         PSPChallenge.frame.setTitle("Panel de control de administrador");
 
-        ConnectionThread conThread = new ConnectionThread();
+        ConnectionThread conThread = new ConnectionThread(lblConnectionTxt);
         conThread.start();
+    }
+
+    private void addInfoLabel() {
+        lblConnectionTxt = new JLabel();
+        lblConnectionTxt.setLocation(20, 220);
+        lblConnectionTxt.setSize(500,300);
+        lblConnectionTxt.setForeground(Color.WHITE);
+        this.add(lblConnectionTxt);
     }
 
 
