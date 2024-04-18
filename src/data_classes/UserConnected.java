@@ -1,7 +1,5 @@
 package data_classes;
 
-import utils.SocketsManager;
-
 import java.util.ArrayList;
 
 public class UserConnected {
@@ -42,7 +40,7 @@ public class UserConnected {
     }
 
 
-    public String showUserData(String loadingProcess, String installedPrograms) {
+    public String showData(String loadingProcess, String installedPrograms) {
         return "<html>Conexión establecida!<br><br>" +
                 " IP del cliente: " + ip + "<br><br>" +
                 "Nombre del usuario: " + name + "<br><br>" +

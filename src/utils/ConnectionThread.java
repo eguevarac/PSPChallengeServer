@@ -28,8 +28,6 @@ public class ConnectionThread extends Thread {
             lblConnectionTxt.setText(
                     "<html>Conexión establecida!<br><br>" +
                             " IP del cliente: " + SocketsManager.socketClient.getInetAddress().getHostAddress() + "<html>");
-//            System.out.println("IP del cliente:");
-//            System.out.println(SocketsManager.socketClient.getInetAddress().getHostAddress());
 
         } catch (Exception e) {
             System.out.println(e);
@@ -39,7 +37,9 @@ public class ConnectionThread extends Thread {
             isLoggedIn = SocketsManager.getRegisterOrLoginPetition(SocketsManager.socketClient.getInetAddress().getHostAddress());
         }while (!isLoggedIn);
 
-        lblConnectionTxt.setText(PSPChallenge.userConnected.showUserData("Cargando...", "Cargando..."));
+        lblConnectionTxt.setText(PSPChallenge.userConnected.showData("Cargando...", "Cargando..."));
+
+
     }
 
 }

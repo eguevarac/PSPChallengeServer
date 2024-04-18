@@ -13,9 +13,7 @@ import java.net.Socket;
 
 public abstract class SocketsManager {
 
-    public static String ipServer;
     public static final int PORT = 5002;
-    public static boolean isOpen = true;
     public static Socket socketClient;
     public static ServerSocket server;
 
@@ -45,6 +43,11 @@ public abstract class SocketsManager {
         return isLoggedIn;
     }
 
+    /**
+     * Chequea si existe el usuario y si coincide el passwd y hace login
+     * @param ipClient String con la ip del cliente, para mostrarla en pantalla
+     * @return Boolean indicando si se ha podido hacer el login
+     */
     private static boolean tryToLogin(String ipClient) {
         boolean loginSuccessful = false;
         User userToLogin = getUserFromClient();
@@ -69,6 +72,9 @@ public abstract class SocketsManager {
         return loginSuccessful;
     }
 
+    /**
+     * Chequea si el usuario ya existe y, en caso negativo, lo registra
+     */
     private static void tryToRegister() {
         User userToRegister = getUserFromClient();
         boolean alreadyExist;
@@ -98,6 +104,10 @@ public abstract class SocketsManager {
         }
     }
 
+    /**
+     * Extrae el usuario que está intentando hacer login
+     * @return User con nombre y psswd del usuario
+     */
     public static User getUserFromClient() {
         User user = null;
         try {
