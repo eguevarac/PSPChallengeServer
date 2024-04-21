@@ -13,43 +13,67 @@ public class ConnectionThread extends Thread {
 
     private final JLabel lblConnectionTxt;
     boolean exit;
-
     boolean isClientConnected;
+    boolean isLoggedIn;
 
     public ConnectionThread(JLabel lblConnectionTxt){
         super();
         this.lblConnectionTxt = lblConnectionTxt;
-        exit = false;
-        isClientConnected = false;
     }
 
     @Override
     public void run() {
         super.run();
+        exit = false;
+        isClientConnected = false;
 
         do{
+            System.out.println("EMPIEZA EL BUCLE");
+            System.out.println("VALOR DEL BOOLEAN -> " + isLoggedIn);
             if(!isClientConnected){
 
+                System.out.println("NO ESTÁ CONECTADO, ASÍ QUE SE CONECTA");
                 establishConnection();
 
-                awaitForClientLogin();
-
-                isClientConnected =true;
+                isClientConnected = true;
             }
+            System.out.println("CHEQUEA EL LOGIN");
+            awaitForClientLogin();
 
+            System.out.println("COGE PROGRAMAS");
             SocketsManager.getPrograms();
             lblConnectionTxt.setText(PSPChallenge.userConnected.showData());
 
+            System.out.println("COGE PROCESOS");
             SocketsManager.getProcesses();
             lblConnectionTxt.setText(PSPChallenge.userConnected.showData());
 
+            System.out.println("ENVÍA PETICIÓN A CLIENTE");
             sendOrderToClient();
 
+            System.out.println("RECIBE PETICIÓN DE CLIENTE");
             receiveOrderFromClient();
+
+            System.out.println("CHEQUEA SI ESTÁ LOGEADO");
+            checkIfClientStillConnected();
+
 
         }while (!exit);
     }
 
+    /**
+     * Chequea si el usuario ha cerrado sesión y actualiza la interfaz
+     */
+    private void checkIfClientStillConnected() {
+        isLoggedIn = SocketsManager.checkUserConnection();
+        if(!isLoggedIn){
+            JOptionPane.showMessageDialog(null, "El usuario ha cerrado sesión", "Información", JOptionPane.INFORMATION_MESSAGE);
+            PSPChallenge.userConnected.clearDataAfterOrder();
+            lblConnectionTxt.setText(
+                    "<html>Conexión establecida!<br><br>" +
+                            " IP del cliente: " + SocketsManager.socketClient.getInetAddress().getHostAddress() + "<html>");
+        }
+    }
 
     /**
      * Recibe la petición de modificación de usuario del cliente
@@ -131,10 +155,10 @@ public class ConnectionThread extends Thread {
      * Espera a que se conecte un cliente
      */
     private void awaitForClientLogin() {
-        boolean isLoggedIn;
-        do{
+        while(!isLoggedIn){
+            System.out.println("NO ESTÁ LOGEADO");
             isLoggedIn = SocketsManager.getRegisterOrLoginPetition(SocketsManager.socketClient.getInetAddress().getHostAddress());
-        }while (!isLoggedIn);
+        }
 
         lblConnectionTxt.setText(PSPChallenge.userConnected.showData());
     }

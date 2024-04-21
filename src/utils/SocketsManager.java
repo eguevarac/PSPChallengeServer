@@ -5,10 +5,7 @@ import data_classes.UserConnected;
 import data_classes.WindowsProcess;
 import p_s_p_challenge.PSPChallenge;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -196,9 +193,21 @@ public abstract class SocketsManager {
         }
     }
 
+    public static boolean checkUserConnection(){
+        boolean userLoggedIn = true;
+        try {
+            InputStream is = socketClient.getInputStream();
+            DataInputStream dis = new DataInputStream(is);
 
+            userLoggedIn = dis.readBoolean();
 
+        } catch (Exception e) {
+            System.out.println("Error cogiendo el boolean de login");
+            System.out.println(e);
+        }
 
+        return  userLoggedIn;
+    }
 
 
 
