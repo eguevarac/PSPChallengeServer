@@ -14,21 +14,29 @@ public class ConnectionThread extends Thread {
     private final JLabel lblConnectionTxt;
     boolean exit;
 
+    boolean isClientConnected;
+
     public ConnectionThread(JLabel lblConnectionTxt){
         super();
         this.lblConnectionTxt = lblConnectionTxt;
         exit = false;
+        isClientConnected = false;
     }
 
     @Override
     public void run() {
         super.run();
 
-        establishConnection();
-
-        awaitForClientLogin();
-
         do{
+            if(!isClientConnected){
+
+                establishConnection();
+
+                awaitForClientLogin();
+
+                isClientConnected =true;
+            }
+
             SocketsManager.getPrograms();
             lblConnectionTxt.setText(PSPChallenge.userConnected.showData());
 
