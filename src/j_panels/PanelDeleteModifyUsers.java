@@ -67,7 +67,7 @@ public class PanelDeleteModifyUsers extends JPanel {
 
             changingUserType();
 
-            FilesRW.overwrittingFile();
+            FilesRW.overwritingFile();
 
             PSPChallenge.frame.setContentPane(new PanelDeleteModifyUsers(panelAdmin));
 
@@ -83,7 +83,7 @@ public class PanelDeleteModifyUsers extends JPanel {
 
             userSelected.setUserType(2);
 
-            FilesRW.overwrittingFile();
+            FilesRW.overwritingFile();
 
             JOptionPane.showMessageDialog(null, "Se ha modificado el tipo de usuario.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
@@ -152,7 +152,7 @@ public class PanelDeleteModifyUsers extends JPanel {
            if(newPasswd != null){
                String encryptedPasswd = BlowFishManager.encryptingPasswd(newPasswd);
                userSelected.setPasswd(encryptedPasswd);
-               FilesRW.overwrittingFile();
+               FilesRW.overwritingFile();
                JOptionPane.showMessageDialog(null, "La contraseña se ha modificado con éxito.", "Error", JOptionPane.INFORMATION_MESSAGE);
            }
 
@@ -190,7 +190,7 @@ public class PanelDeleteModifyUsers extends JPanel {
 
         PSPChallenge.usersList.remove(userSelected);
 
-        FilesRW.overwrittingFile();
+        FilesRW.overwritingFile();
 
         JOptionPane.showMessageDialog(null, "Usuario borrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
@@ -201,7 +201,7 @@ public class PanelDeleteModifyUsers extends JPanel {
 
         PSPChallenge.usersList.remove(userSelected);
 
-        FilesRW.overwrittingFile();
+        FilesRW.overwritingFile();
 
         JOptionPane.showMessageDialog(null, "Usuario borrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 

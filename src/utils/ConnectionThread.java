@@ -1,5 +1,6 @@
 package utils;
 
+import data_classes.User;
 import p_s_p_challenge.PSPChallenge;
 
 import javax.swing.*;
@@ -36,19 +37,80 @@ public class ConnectionThread extends Thread {
 
             sendOrderToClient();
 
+            receiveOrderFromClient();
+
         }while (!exit);
     }
+
+
+    /**
+     * Recibe la petición de modificación de usuario del cliente
+     * y lo actualiza
+     */
+    private void receiveOrderFromClient() {
+        String clientOrder = SocketsManager.getString();
+        int indexToDelete;
+        if(clientOrder.equals("changeUser")){
+
+            User userToChange = SocketsManager.getUserFromClient();
+
+            indexToDelete = lookingForUser();
+
+            updateUser(userToChange, indexToDelete);
+
+            showAndSendInfo();
+
+        }
+    }
+
+    /**
+     * Busca al usuario en la lista de usuarios y obtiene su index
+     * @return int con el index del usuario
+     */
+    private int lookingForUser() {
+        int indexToDelete = -1;
+        for (User user :
+                PSPChallenge.usersList) {
+            if(user.getName().equals(PSPChallenge.userConnected.getName())){
+                indexToDelete = PSPChallenge.usersList.indexOf(user);
+            }
+        }
+        return indexToDelete;
+    }
+
+    /**
+     * Actualiza la lista de usuarios y sobreescribe el fichero
+     * @param userToChange User que será modificado en la lista
+     * @param indexToDelete int con el índice del usuario que hay que modificar
+     */
+    private void updateUser(User userToChange, int indexToDelete) {
+        PSPChallenge.usersList.remove(indexToDelete);
+        PSPChallenge.usersList.add(userToChange);
+        FilesRW.overwritingFile();
+        PSPChallenge.userConnected.setName(userToChange.getName());
+    }
+
+    /**
+     * Muestra el diálogo de información de actualización de usuario y le envía la respuesta al cliente
+     */
+    private void showAndSendInfo() {
+        JOptionPane.showMessageDialog(null, "El cliente ha cambiado de nombre o contraseña", "Información", JOptionPane.INFORMATION_MESSAGE);
+        SocketsManager.sendString("Usuario actualizado con éxito");
+        lblConnectionTxt.setText(PSPChallenge.userConnected.showData());
+    }
+
+
 
     /**
      * Envía la orden (o nada) al cliente
      */
     private void sendOrderToClient() {
-        String response;
 
         SocketsManager.sendString(PSPChallenge.userConnected.getOrderToClient());
 
         if(PSPChallenge.userConnected.getOrderToClient().equals("stopProcess")) {
 
+            String response;
             SocketsManager.sendString(PSPChallenge.userConnected.getProcessPID());
             response = SocketsManager.getString();
             JOptionPane.showMessageDialog(null, response, "Información", JOptionPane.INFORMATION_MESSAGE);

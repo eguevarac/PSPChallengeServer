@@ -2,4 +2,4 @@
 1;p;$2a$10$c21LZvDeoyE5ksVF0dtsN.ZwBIscpG2lMKumZLGpQW4xkqKqD9rWG
 2;k;$2a$10$94.7vBL.wIEOvzBI.oG31.GEHGhK8WGdNa5LfnWpn3.W1GpwO61cO
 1;quique;$2a$10$Py.h9i2CZ9zy3UWXnpLwhO.DVDtbOY1a6jpcfg9v8VLU.AlFuAOsO
-2;manolo;$2a$10$JzrGc.wB9pclggiWu8K5iu8GaE8kiPDlnbDHNmoLuD4XQRjVb5RrO
+2;perico;$2a$10$AsOJgI2v34aP6NYfYrkln.D9O6c5HzJa64cVYMe.4O/0L4psgj3CO

@@ -1,7 +1,6 @@
 package utils;
 
 import data_classes.User;
-import data_classes.WindowsProcess;
 import p_s_p_challenge.PSPChallenge;
 
 import java.io.*;
@@ -97,7 +96,10 @@ public class FilesRW {
         }
     }
 
-    public static void overwrittingFile() {
+    /**
+     * Sobreescribe el archivo donde están guardados los usuarios
+     */
+    public static void overwritingFile() {
         Path path = Paths.get("src/resources/files/usersList.txt");
 
         deleteFile(path);
