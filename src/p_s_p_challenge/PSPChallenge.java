@@ -21,6 +21,8 @@ public class PSPChallenge {
 
     public static JFrame frame;
 
+    public static boolean adminLogout = false;
+
     public static UserConnected userConnected;
 
     public PSPChallenge() {

@@ -3,6 +3,7 @@ package j_panels;
 import j_dialogs.UserCreationDialog;
 import p_s_p_challenge.PSPChallenge;
 import utils.ConnectionThread;
+import utils.SocketsManager;
 import utils.SpellBook;
 
 import javax.swing.*;
@@ -125,8 +126,8 @@ public class PanelAdmin extends JPanel{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                PSPChallenge.frame.setContentPane(new PanelMain());
-                PSPChallenge.actualUser = null;
+                PSPChallenge.adminLogout = true;
+                JOptionPane.showMessageDialog(null, "Solicitud de cierre de sesión en proceso. Se ejecutará al finalizar el ciclo, para no perder información", "Información", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }

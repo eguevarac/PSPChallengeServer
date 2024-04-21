@@ -1,6 +1,7 @@
 package utils;
 
 import data_classes.User;
+import j_panels.PanelMain;
 import p_s_p_challenge.PSPChallenge;
 
 import javax.swing.*;
@@ -14,7 +15,6 @@ import static utils.SocketsManager.socketClient;
 public class ConnectionThread extends Thread {
 
     private final JLabel lblConnectionTxt;
-    boolean exit;
     boolean isClientConnected;
     boolean isLoggedIn;
 
@@ -27,7 +27,7 @@ public class ConnectionThread extends Thread {
     @Override
     public void run() {
         super.run();
-        exit = false;
+        PSPChallenge.adminLogout = false;
         isClientConnected = false;
 
         do{
@@ -81,7 +81,16 @@ public class ConnectionThread extends Thread {
                 isLoggedIn = false;
             }
 
-        }while (!exit);
+            System.out.println("ENVÍA SI EL ADMIN SIGUE LOGEADO");
+            SocketsManager.sendAdminConnection();
+
+        }while (!PSPChallenge.adminLogout);
+
+        System.out.println("EL ADMIN HA HECHO LOGOUT Y SE HA SALIDO DEL BUCLE PRINCIPAL DEL THREAD");
+        SocketsManager.closeClient();
+        PSPChallenge.frame.setContentPane(new PanelMain());
+        PSPChallenge.actualUser = null;
+
     }
 
     /**

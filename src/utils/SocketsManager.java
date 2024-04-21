@@ -5,6 +5,7 @@ import data_classes.UserConnected;
 import data_classes.WindowsProcess;
 import p_s_p_challenge.PSPChallenge;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -200,6 +201,10 @@ public abstract class SocketsManager {
         }
     }
 
+    /**
+     * Chequea si el cliente sigue logeado
+     * @return boolean con el estado del login/logout
+     */
     public static boolean checkUserConnection(){
         boolean userLoggedIn = true;
         try {
@@ -217,8 +222,17 @@ public abstract class SocketsManager {
         return  userLoggedIn;
     }
 
+    public static void sendAdminConnection() {
+        System.out.println("VALOR DEL BOOLEAN ADMIN_LOGOUT -> " + PSPChallenge.adminLogout);
+        try {
+            new DataOutputStream(socketClient.getOutputStream()).writeBoolean(PSPChallenge.adminLogout);
 
-
+        } catch (IOException ex) {
+            System.exit(0);
+            System.out.println("excepción IOE");
+            System.out.println("FALLO ENVIANDO BOOLEAN ADMIN_LOGOUT");
+        }
+    }
 
 
 
@@ -232,8 +246,6 @@ public abstract class SocketsManager {
             System.out.println(e);
         }
     }
-
-
 
 
 
