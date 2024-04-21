@@ -4,10 +4,15 @@ import data_classes.User;
 import data_classes.UserConnected;
 import listeners.FrameWindowListener;
 import j_panels.PanelMain;
+import utils.SocketsManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.util.ArrayList;
+
+import static utils.SocketsManager.PORT;
 
 
 public class PSPChallenge {
@@ -23,6 +28,12 @@ public class PSPChallenge {
 
 
     public static void main(String[] args) {
+
+        try {
+            SocketsManager.server = new ServerSocket(PORT);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         frame = new JFrame("Gestión de usuarios y procesos");
 

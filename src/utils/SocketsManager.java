@@ -37,6 +37,7 @@ public abstract class SocketsManager {
             }
         } catch (Exception e) {
             System.out.println(e);
+            closeClient();
         }
 
         return isLoggedIn;
@@ -99,6 +100,7 @@ public abstract class SocketsManager {
         try {
             new ObjectOutputStream(socketClient.getOutputStream()).writeObject(response);
         } catch (IOException ex) {
+            closeClient();
             System.out.println("excepción IOE");
         }
     }
@@ -117,6 +119,7 @@ public abstract class SocketsManager {
 
         } catch (Exception e) {
 
+            closeClient();
             System.out.println(e);
         }
 
@@ -136,6 +139,7 @@ public abstract class SocketsManager {
 
         } catch (Exception e) {
 
+            closeClient();
             System.out.println(e);
         }
         return user;
@@ -154,6 +158,7 @@ public abstract class SocketsManager {
 
         } catch (IOException ex) {
 
+            closeClient();
             System.out.println("excepción IOE");
         }
     }
@@ -170,6 +175,7 @@ public abstract class SocketsManager {
             PSPChallenge.userConnected.setLoadingPrograms("Cargados con éxito");
 
         } catch (Exception e) {
+            closeClient();
             System.out.println("Error cogiendo el arrayList");
             System.out.println(e);
         }
@@ -188,6 +194,7 @@ public abstract class SocketsManager {
             PSPChallenge.userConnected.setLoadingProcess("Cargados con éxito");
 
         } catch (Exception e) {
+            closeClient();
             System.out.println("Error cogiendo el arrayList de procesos");
             System.out.println(e);
         }
@@ -202,6 +209,7 @@ public abstract class SocketsManager {
             userLoggedIn = dis.readBoolean();
 
         } catch (Exception e) {
+            closeClient();
             System.out.println("Error cogiendo el boolean de login");
             System.out.println(e);
         }
@@ -214,6 +222,16 @@ public abstract class SocketsManager {
 
 
 
+    public static void closeClient() {
+        try{
+            socketClient.close();
+            System.out.println("Conexión con cliente cerrada");
+
+        }catch (Exception e){
+
+            System.out.println(e);
+        }
+    }
 
 
 

@@ -4,10 +4,12 @@ import data_classes.User;
 import p_s_p_challenge.PSPChallenge;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 
 import static utils.SocketsManager.PORT;
+import static utils.SocketsManager.socketClient;
 
 public class ConnectionThread extends Thread {
 
@@ -19,6 +21,7 @@ public class ConnectionThread extends Thread {
     public ConnectionThread(JLabel lblConnectionTxt){
         super();
         this.lblConnectionTxt = lblConnectionTxt;
+
     }
 
     @Override
@@ -28,8 +31,13 @@ public class ConnectionThread extends Thread {
         isClientConnected = false;
 
         do{
+            if(socketClient != null){
+                isClientConnected = !socketClient.isClosed();
+            }
+
             System.out.println("EMPIEZA EL BUCLE");
-            System.out.println("VALOR DEL BOOLEAN -> " + isLoggedIn);
+            System.out.println("VALOR DEL BOOLEAN IS_LOGGED_IN -> " + isLoggedIn);
+            System.out.println("VALOR DEL BOOLEAN IS_CLIENT_CONNECTED -> " + isClientConnected);
             if(!isClientConnected){
 
                 System.out.println("NO ESTÁ CONECTADO, ASÍ QUE SE CONECTA");
@@ -37,26 +45,41 @@ public class ConnectionThread extends Thread {
 
                 isClientConnected = true;
             }
+            if(!socketClient.isClosed()){
             System.out.println("CHEQUEA EL LOGIN");
-            awaitForClientLogin();
+                awaitForClientLogin();
+            }
 
+            if(!socketClient.isClosed()){
             System.out.println("COGE PROGRAMAS");
             SocketsManager.getPrograms();
             lblConnectionTxt.setText(PSPChallenge.userConnected.showData());
+            }
 
+            if(!socketClient.isClosed()) {
             System.out.println("COGE PROCESOS");
-            SocketsManager.getProcesses();
-            lblConnectionTxt.setText(PSPChallenge.userConnected.showData());
+                SocketsManager.getProcesses();
+                lblConnectionTxt.setText(PSPChallenge.userConnected.showData());
+            }
 
+            if(!socketClient.isClosed()) {
             System.out.println("ENVÍA PETICIÓN A CLIENTE");
-            sendOrderToClient();
+                sendOrderToClient();
+            }
 
+            if(!socketClient.isClosed()) {
             System.out.println("RECIBE PETICIÓN DE CLIENTE");
-            receiveOrderFromClient();
+                receiveOrderFromClient();
+            }
 
+            if(!socketClient.isClosed()) {
             System.out.println("CHEQUEA SI ESTÁ LOGEADO");
-            checkIfClientStillConnected();
+                checkIfClientStillConnected();
+            }
 
+            if(socketClient.isClosed()){
+                isLoggedIn = false;
+            }
 
         }while (!exit);
     }
@@ -155,12 +178,15 @@ public class ConnectionThread extends Thread {
      * Espera a que se conecte un cliente
      */
     private void awaitForClientLogin() {
-        while(!isLoggedIn){
+        while(!isLoggedIn && !socketClient.isClosed()){
             System.out.println("NO ESTÁ LOGEADO");
             isLoggedIn = SocketsManager.getRegisterOrLoginPetition(SocketsManager.socketClient.getInetAddress().getHostAddress());
         }
 
-        lblConnectionTxt.setText(PSPChallenge.userConnected.showData());
+        System.out.println("SALIÓ DEL BUCLE DE LOGIN");
+        if(PSPChallenge.userConnected != null){
+            lblConnectionTxt.setText(PSPChallenge.userConnected.showData());
+        }
     }
 
 
@@ -169,7 +195,6 @@ public class ConnectionThread extends Thread {
      */
     private void establishConnection() {
         try {
-            SocketsManager.server = new ServerSocket(PORT);
             lblConnectionTxt.setText("Socket servidor abierto esperando conexiones...");
 
             SocketsManager.socketClient = SocketsManager.server.accept();
