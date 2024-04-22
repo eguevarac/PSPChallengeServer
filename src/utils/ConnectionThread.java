@@ -90,7 +90,6 @@ public class ConnectionThread extends Thread {
         SocketsManager.closeClient();
         PSPChallenge.frame.setContentPane(new PanelMain());
         PSPChallenge.actualUser = null;
-
     }
 
     /**

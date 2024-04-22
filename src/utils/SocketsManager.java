@@ -177,7 +177,7 @@ public abstract class SocketsManager {
 
         } catch (Exception e) {
             closeClient();
-            System.out.println("Error cogiendo el arrayList");
+            System.out.println("Error cogiendo el arrayList de programas");
             System.out.println(e);
         }
     }
@@ -228,7 +228,6 @@ public abstract class SocketsManager {
             new DataOutputStream(socketClient.getOutputStream()).writeBoolean(PSPChallenge.adminLogout);
 
         } catch (IOException ex) {
-            System.exit(0);
             System.out.println("excepción IOE");
             System.out.println("FALLO ENVIANDO BOOLEAN ADMIN_LOGOUT");
         }

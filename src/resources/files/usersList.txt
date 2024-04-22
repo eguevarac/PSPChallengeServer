@@ -2,6 +2,6 @@
 1;p;$2a$10$c21LZvDeoyE5ksVF0dtsN.ZwBIscpG2lMKumZLGpQW4xkqKqD9rWG
 1;quique;$2a$10$Py.h9i2CZ9zy3UWXnpLwhO.DVDtbOY1a6jpcfg9v8VLU.AlFuAOsO
 2;manolo;$2a$10$wnTgNuDubLUAZim21zQDueO81zlcAdjf1BtTTepxrQhDsJvwZ3Voy
-2;k;$2a$10$L4/zWstDeTXBuJ2iKvAuKOaAnO8R5WnXtdBAt6PEvsUeWPStmiMpy
 2;p;$2a$10$08UxJV.jsGxDxlbE7mI.Ne4LbRSlU4ZpoCx5RLntUxbHOkfQ6wm5W
 2;lala;$2a$10$yuRuVz2lkvWYT.FSEWFtUe1J.ETS1G1xur5/aL7j0VZh2DXYpSBxq
+2;k;$2a$10$O4n3mZNoGLQGziF5x.goI.CcnxHZROJ7qeGqX1PyjYXd0OUZnhMgC
